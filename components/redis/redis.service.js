@@ -1,12 +1,12 @@
-import { redisClient } from './redis.config.js'
-import { redisModel } from '../db/mongo.model.js'
+import { redisClient } from './redis.config.js';
+import { redisModel } from '../db/mongo.model.js';
 import uuid from 'uuid/v1.js';
-import { promisify } from 'util'
+import { promisify } from 'util';
 
 const publishClient = redisClient();
 const client = redisClient();
 
-const getAsync = promisify(client.get).bind(client)
+const getAsync = promisify(client.get).bind(client);
 const setAsync = promisify(client.set).bind(client);
 
 export function subscribe(client, channel) {
@@ -41,7 +41,7 @@ export function readAndPublish(client, incomingChannel) {
 
 async function setValueInRedis(message) {
   const parsedMessage = JSON.parse(message);
-  
+
   if(!(await getAsync(parsedMessage.originalMessage))) {
     await setAsync(parsedMessage.originalMessage, uuid());
     client.expire(parsedMessage.originalMessage, 10);
