@@ -1,3 +1,6 @@
+## Implementing redis pub/sub in Node.js
+This node application is implementation of basic publish/subscribe (pub/sub) method in redis and how redis store can be used to avoid reading the duplicate message.
+
 ## Avoid reading duplicate message from redis.
 
 When scaling the application horizontally there are huge chances of reading duplicate messages and pushing them to db if things are not taken care of. TO avoid such scenario following approach is followed:
